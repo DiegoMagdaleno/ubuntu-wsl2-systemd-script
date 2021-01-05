@@ -70,6 +70,9 @@ EOF
 if ! grep 'start-systemd-namespace' /etc/bash.bashrc >/dev/null; then
   sudo sed -i 2a"# Start or enter a PID namespace in WSL2\nsource /usr/sbin/start-systemd-namespace\n" /etc/bash.bashrc
 fi
+if grep 'zsh' /etc/shells >/dev/null && ! grep 'start-systemd-namespace' /etc/zsh/zshrc >/dev/null; then
+  sudo sed -i 2a"# Start or enter a PID namespace in WSL2\nsource /usr/sbin/start-systemd-namespace\n" /etc/zsh/zshrc
+fi
 
 sudo rm -f /etc/systemd/user/sockets.target.wants/dirmngr.socket
 sudo rm -f /etc/systemd/user/sockets.target.wants/gpg-agent*.socket
